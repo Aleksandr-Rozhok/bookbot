@@ -3,7 +3,7 @@ def main():
         file_contents = f.read()
     
     def count_words(file):
-        num_of_words = len(file.split())
+        return len(file.split())
 
     def count_chars(file):
         list_of_chars = list(file.lower())
@@ -28,9 +28,20 @@ def main():
                 list_of_dict_with_chars.append({"letter": key, "count": val})
         
         list_of_dict_with_chars.sort(reverse=True, key=sort_on)
-        print(list_of_dict_with_chars)
+        return list_of_dict_with_chars
 
+    def send_report():
+        num_of_words = count_words(file_contents)
+        num_of_chars = count_chars(file_contents)
+        list_of_data = sort_dict(num_of_chars)
 
-    sort_dict(count_chars(file_contents))
+        print(f"--- Begin report of books/frankenstein.txt --- \n{num_of_words} words found in the document\n")
+        
+        for item in list_of_data:
+            print(f"The {item['letter']} character was found {item['count']} times")
+        
+        print("--- End report ---")
+
+    send_report()
 
 main()
